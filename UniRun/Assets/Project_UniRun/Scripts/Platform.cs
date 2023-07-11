@@ -7,6 +7,7 @@ public class Platform : MonoBehaviour
     public GameObject[] obstacles;
     public GameObject[] coins;
     private bool isStepped = false;
+    private PlayerController playerController;
 
 
     private void OnEnable()
@@ -41,7 +42,7 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Player" && isStepped) 
+        if (collision.collider.tag == "Player" && isStepped)
         {
             isStepped = true;
         }

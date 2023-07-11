@@ -29,6 +29,7 @@ public class Coin : MonoBehaviour
             GameManager.instance.AddScore(1);
             //coinAudio.clip = getCoin;
             coinAudio.Play();
+
             //gameObject.SetActive(false);
             coinSprite.enabled = false;
         }

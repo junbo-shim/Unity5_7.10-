@@ -5,16 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public AudioClip deathClip;
-    //public AudioClip coinClip;
     public float jumpForce = 450f;
 
     private int jumpCount = 0;
     private bool isGround = false;
-    private bool isDead = false;
+    public bool isDead = false;
+    public bool isBig = false;
 
     private Rigidbody2D playerRigidBody;
     private Animator animator;
     private AudioSource playerAudio;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +24,11 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
 
+
         Debug.Assert(playerRigidBody != null);
         Debug.Assert(animator != null);
         Debug.Assert(playerAudio != null);
+
     }
 
     // Update is called once per frame
@@ -35,7 +38,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if(Input.GetMouseButtonDown(0) && jumpCount < 2) 
+        if (Input.GetMouseButtonDown(0) && jumpCount < 2) 
         {
             jumpCount += 1;
             playerRigidBody.velocity = Vector2.zero;
@@ -66,14 +69,17 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.tag.Equals("Dead") && isDead == false) 
         {
-            Die();
+            if (isBig == true)
+            {
+                transform.localScale =  new Vector3(-1, -1, 0) + transform.localScale;
+                collision.gameObject.SetActive(false);
+                isBig = false;
+            }
+            else
+            {
+                Die();
+            }
         }
-
-        //if (collision.tag.Equals("Coin")) 
-        //{
-        //    playerAudio.clip = coinClip;
-        //    playerAudio.Play();
-        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
