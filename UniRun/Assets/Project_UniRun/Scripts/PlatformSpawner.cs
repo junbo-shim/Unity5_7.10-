@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour
 {
     public GameObject platformPrefab;
-    public int count = 3;
+    public int platformCount = 3;
+    public int coinCount = 7;
 
     public float timeBetSpawnMin = 1.25f;
     public float timeBetSpawnMax = 2.25f;
@@ -25,9 +26,9 @@ public class PlatformSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        platforms = new GameObject[count];
+        platforms = new GameObject[platformCount];
 
-        for(int i =0; i < count; i++) 
+        for(int i = 0; i < platformCount; i++) 
         {
             platforms[i] = Instantiate(platformPrefab, poolPosition, Quaternion.identity);
         }
@@ -58,7 +59,7 @@ public class PlatformSpawner : MonoBehaviour
 
             currentIndex++;
 
-            if(currentIndex >= count) 
+            if(currentIndex >= platformCount) 
             {
                 currentIndex = 0;
             }

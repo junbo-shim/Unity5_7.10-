@@ -5,12 +5,13 @@ using UnityEngine;
 public class Platform : MonoBehaviour
 {
     public GameObject[] obstacles;
-    private bool stepped = false;
+    public GameObject[] coins;
+    private bool isStepped = false;
 
 
     private void OnEnable()
     {
-        stepped = false;
+        isStepped = false;
 
         for(int i = 0; i < obstacles.Length; i++) 
         {
@@ -23,14 +24,26 @@ public class Platform : MonoBehaviour
                 obstacles[i].SetActive(false);
             }
         }
+
+        for(int i = 0; i < coins.Length; i++) 
+        {
+            if(Random.Range(0, 7) == 0) 
+            {
+                coins[i].SetActive(true);
+            }
+            else 
+            {
+                coins[i].SetActive(false);
+            }
+        }
     }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Player" && stepped) 
+        if(collision.collider.tag == "Player" && isStepped) 
         {
-            stepped = true;
+            isStepped = true;
         }
         GameManager.instance.AddScore(1);
     }
@@ -48,6 +61,4 @@ public class Platform : MonoBehaviour
     {
 
     }
-
-
 }

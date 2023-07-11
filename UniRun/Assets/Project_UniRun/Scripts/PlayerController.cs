@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public AudioClip deathClip;
+    //public AudioClip coinClip;
     public float jumpForce = 450f;
 
     private int jumpCount = 0;
@@ -67,6 +68,12 @@ public class PlayerController : MonoBehaviour
         {
             Die();
         }
+
+        //if (collision.tag.Equals("Coin")) 
+        //{
+        //    playerAudio.clip = coinClip;
+        //    playerAudio.Play();
+        //}
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
