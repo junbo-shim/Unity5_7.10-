@@ -29,7 +29,9 @@ public class Potion : MonoBehaviour
         {
             if (playerController.isBig == true)
             {
-                return;
+                GameManager.instance.AddScore(1);
+                potionAudio.Play();
+                potionSprite.enabled = false;
             }
             else 
             {

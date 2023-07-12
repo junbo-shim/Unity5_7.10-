@@ -38,19 +38,39 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        if (Input.GetMouseButtonDown(0) && jumpCount < 2) 
+        // ! Legacy Code
+        //if (Input.GetMouseButtonDown(0) && jumpCount < 2) 
+        //{
+        //    jumpCount += 1;
+        //    playerRigidBody.velocity = Vector2.zero;
+        //    playerRigidBody.AddForce(new Vector2(0, jumpForce));
+        //    playerAudio.Play();
+        //}
+        //else if(Input.GetMouseButtonDown(0) && 
+        //    0 < playerRigidBody.velocity.y) 
+        //{
+        //    playerRigidBody.velocity = playerRigidBody.velocity * 0.5f;
+        //}
+        // ! Legacy Code
+
+        //Jump();
+
+        animator.SetBool("Ground", isGround);
+    }
+
+    public void Jump() 
+    {
+        if (jumpCount < 2)
         {
             jumpCount += 1;
             playerRigidBody.velocity = Vector2.zero;
             playerRigidBody.AddForce(new Vector2(0, jumpForce));
             playerAudio.Play();
         }
-        else if(Input.GetMouseButtonDown(0) && 
-            0 < playerRigidBody.velocity.y) 
+        else if (0 < playerRigidBody.velocity.y)
         {
             playerRigidBody.velocity = playerRigidBody.velocity * 0.5f;
         }
-        animator.SetBool("Ground", isGround);
     }
 
     private void Die() 
@@ -79,6 +99,10 @@ public class PlayerController : MonoBehaviour
             {
                 Die();
             }
+        }
+        if(collision.tag.Equals("Fall") && isDead == false)
+        {
+            Die();
         }
     }
 
